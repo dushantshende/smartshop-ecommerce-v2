@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ds.smartshop.entity.Product;
+import com.ds.smartshop.dto.ProductRequest;
+import com.ds.smartshop.dto.ProductResponse;
 import com.ds.smartshop.service.ProductService;
 
 import jakarta.validation.Valid;
@@ -25,31 +26,31 @@ public class ProductController {
 	}
 	
 	@GetMapping("/api/products")
-	public List<Product> getProducts() {
+	public List<ProductResponse> getProducts() {
 		return productService.getAllProducts();
 		
 	}
 	
 	@GetMapping("/api/products/{id}")
-	public Product getProductById(@PathVariable Long id) {
+	public ProductResponse getProductById(@PathVariable Long id) {
 		return productService.getProductById(id);
 	}
 	
 	@PostMapping("/api/products")
-	public Product saveProduct(@Valid @RequestBody Product product) {
+	public ProductResponse saveProduct(@Valid @RequestBody ProductRequest request) {
 		
-		return productService.saveProduct(product);
+		return productService.saveProduct(request);
 	}
 	
 	@PutMapping("/api/products/{id}")
-	public Product updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
+	public ProductResponse updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
 		
-		return productService.updateProduct(id, product);
+		return productService.updateProduct(id, request);
 		
 	}
 	
 	@DeleteMapping("/api/products/{id}")
-	public void deletProduct(@PathVariable Long id) {
+	public void deleteProduct(@PathVariable Long id) {
 		 productService.deleteProduct(id);
 	}
 }
