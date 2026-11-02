@@ -32,4 +32,13 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(DuplicateResourceException.class)
+	public ResponseEntity<ApiErrorResponse>handleDuplicateResourceException(DuplicateResourceException ex){
+		
+		List<String> errors=List.of(ex.getMessage());
+		
+		ApiErrorResponse response=new ApiErrorResponse(HttpStatus.CONFLICT.value(),"Resource already exists",errors);
+		return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+	}
 }
