@@ -47,6 +47,7 @@ public class UserServiceImpl implements IUserService {
 		user.setPhone(request.getPhone());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		user.getRoles().add(customerRole);
+		user.setEnabled(true);
 		userRepository.save(user);
 	}
 
